@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HeavyViewController : UIViewController
-
+{
+    IBOutlet UISlider *slider;
+    IBOutlet UIImageView *imageView;
+    IBOutlet UIButton *leftButton;
+    IBOutlet UIButton *rightButton;
+}
 @end

@@ -22,4 +22,19 @@
     UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
+- (void)viewDidLoad
+{
+    [slider setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin |
+     UIViewAutoresizingFlexibleWidth];
+    
+    [imageView setAutoresizingMask:UIViewAutoresizingFlexibleHeight |
+     UIViewAutoresizingFlexibleWidth];
+    
+    [leftButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin |
+     UIViewAutoresizingFlexibleRightMargin];
+     
+    [rightButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin |
+     UIViewAutoresizingFlexibleLeftMargin];
+}
+
 @end
