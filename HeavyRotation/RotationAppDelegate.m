@@ -12,17 +12,23 @@
 @implementation RotationAppDelegate
 
 @synthesize window = _window;
+@synthesize hvc;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    hvc = [[HeavyViewController alloc] init];
+    
     // Get the device object
     UIDevice *device = [UIDevice currentDevice];
     
     // Tell it to start monitoring the accelerometer for orientation
     [device beginGeneratingDeviceOrientationNotifications];
+    
+    // Tell it to start monitoring the proximity sensor
+    [device setProximityMonitoringEnabled:YES];
     
     // Get the notification center for the app
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -33,7 +39,11 @@
                name:UIDeviceOrientationDidChangeNotification
              object:device];
     
-    HeavyViewController *hvc = [[HeavyViewController alloc] init];
+    [nc addObserver:self
+           selector:@selector(proximityChanged:) 
+               name:UIDeviceProximityStateDidChangeNotification
+             object:device];
+    
     [[self window] setRootViewController:hvc];
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -72,6 +82,12 @@
 {
     // Log the constant that represents the current orientation
     NSLog(@"orientationChanged: %d", [[note object] orientation]);
+}
+
+- (void)proximityChanged:(NSNotification *)note
+{
+    // Change the background color of heavy view controller's view to dark gray
+    [[[self hvc] view] setBackgroundColor:[UIColor darkGrayColor]];
 }
 
 @end
