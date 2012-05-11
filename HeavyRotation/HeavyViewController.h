@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HeavyViewController : UIViewController
+{
+    __weak IBOutlet UIButton *button;
+}
+
+@property (nonatomic) CGPoint leftRectCenter;
 
 @end
